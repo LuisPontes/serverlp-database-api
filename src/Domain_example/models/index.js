@@ -1,26 +1,34 @@
-const dbConfig = require("../../config/db.config.js");
+module.exports = db => {
 
-const Sequelize = require("sequelize");
-const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
-  host: dbConfig.HOST,
-  dialect: dbConfig.dialect,
-  operatorsAliases: false,
+  db.example = require("./example.model.js")(db.sequelize, db.Sequelize);
 
-  pool: {
-    max: dbConfig.pool.max,
-    min: dbConfig.pool.min,
-    acquire: dbConfig.pool.acquire,
-    idle: dbConfig.pool.idle,
-  },
-});
+  db.images = require("./image.model.js")(db.sequelize, db.Sequelize);
+  
+};
 
-const db = {};
+// const dbConfig = require("../../config/db.config.js");
 
-db.Sequelize = Sequelize;
-db.sequelize = sequelize;
+// const Sequelize = require("sequelize");
+// const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
+//   host: dbConfig.HOST,
+//   dialect: dbConfig.dialect,
+//   operatorsAliases: false,
 
-db.example = require("./example.model.js")(sequelize, Sequelize);
+//   pool: {
+//     max: dbConfig.pool.max,
+//     min: dbConfig.pool.min,
+//     acquire: dbConfig.pool.acquire,
+//     idle: dbConfig.pool.idle,
+//   },
+// });
 
-db.images = require("./image.model.js")(sequelize, Sequelize);
+// const db = {};
 
-module.exports = db;
+// db.Sequelize = Sequelize;
+// db.sequelize = sequelize;
+
+// db.example = require("./example.model.js")(sequelize, Sequelize);
+
+// db.images = require("./image.model.js")(sequelize, Sequelize);
+
+// module.exports = db;

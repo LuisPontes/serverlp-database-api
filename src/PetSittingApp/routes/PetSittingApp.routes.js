@@ -12,11 +12,44 @@ module.exports = function(app) {
 
   app.get("/api/test/all", controller.allAccess);
 
-  app.get(
-    "/api/test/user",
+  //PETS
+  app.post(
+    "/api/pet/newpet",
     [authJwt.verifyToken],
-    controller.userBoard
+    controller.addPet
   );
+
+  app.get(
+    "/api/pet/mypets",
+    [authJwt.verifyToken],
+    controller.getPets
+  );
+
+  app.post(
+    "/api/pet/deletePet",
+    [authJwt.verifyToken],
+    controller.deletePet
+  );
+
+//Reserves
+  app.get(
+    "/api/pet/reserves",
+    [authJwt.verifyToken],
+    controller.getReserves
+  );
+  app.post(
+    "/api/pet/newevent",
+    [authJwt.verifyToken],
+    controller.addReserve
+  );
+  app.post(
+    "/api/pet/deleteEvent",
+    [authJwt.verifyToken],
+    controller.deleteEvent
+  );
+ 
+
+
 
   app.get(
     "/api/test/mod",

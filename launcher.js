@@ -8,14 +8,14 @@ global.__basedir = __dirname;
 
 
 var corsOptions = {
-  origin: "http://localhost:3000"
+  // origin: "http://localhost:3000"
+  // origin: "http://192.168.0.10:3000"
 };
 
 app.use(cors(corsOptions));
 
 // database
 const db = require("./src/authentication/models");
-const Role = db.role;
 
 db.sequelize.sync();
 
@@ -29,19 +29,25 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to ServerLp-database-API." });
 });
+
 //Authentication routes
 require("./src/authentication/routes/auth.routes")(app);
+//PetSittingApp domain
+// db = require("./src/PetSittingApp/models")(db);
+db.pets = require("./src/PetSittingApp/models/pets.model")(db.sequelize, db.Sequelize);
+db.reserves = require("./src/PetSittingApp/models/reserves.model.js")(db.sequelize, db.Sequelize);
+require("./src/PetSittingApp/routes/PetSittingApp.routes.js")(app);
 
 // // DOmain Examples routes
 // db = require("./src/Domain_example/models")(db);
-db.example = require("./src/Domain_example/models/example.model.js")(db.sequelize, db.Sequelize);
-db.images = require("./src/Domain_example/models/image.model.js")(db.sequelize, db.Sequelize);
+// db.example = require("./src/Domain_example/models/example.model.js")(db.sequelize, db.Sequelize);
+// db.images = require("./src/Domain_example/models/image.model.js")(db.sequelize, db.Sequelize);
 
-require("./src/Domain_example/routes/user.routes")(app);
+// require("./src/Domain_example/routes/user.routes")(app);
 
 // shedulePetSittingApp domain
-// db = require("./src/schedulePetSittingApp/models")(db);
-// require("./src/schedulePetSittingApp/routes/schedulePetSittingApp.routes.js")(app);
+// db = require("./src/PetSittingApp/models")(db);
+// require("./src/PetSittingApp/routes/PetSittingApp.routes.js")(app);
 
 // // Generic routes
 // require("./src/generic/routes/api.routes.js")(app);

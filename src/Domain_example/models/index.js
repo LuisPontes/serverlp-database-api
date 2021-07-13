@@ -1,3 +1,4 @@
+
 module.exports = db => {
 
   db.example = require("./example.model.js")(db.sequelize, db.Sequelize);

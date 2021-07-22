@@ -11,7 +11,7 @@ module.exports = function(app) {
   });
 
   app.get("/api/test/all", controller.allAccess);
-
+//*Clients */
   //PETS
   app.post(
     "/api/pet/newpet",
@@ -47,19 +47,22 @@ module.exports = function(app) {
     [authJwt.verifyToken],
     controller.deleteEvent
   );
- 
 
-
-
+ //*Workers */
   app.get(
     "/api/test/mod",
     [authJwt.verifyToken, authJwt.isModerator],
     controller.moderatorBoard
   );
-
+//*Administrators */
   app.get(
     "/api/test/admin",
     [authJwt.verifyToken, authJwt.isAdmin],
     controller.adminBoard
+  );
+  app.get(
+    "/api/admin/users",
+    [authJwt.verifyToken, authJwt.isAdmin],
+    controller.adminUsers
   );
 };

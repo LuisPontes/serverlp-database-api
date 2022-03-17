@@ -37,6 +37,8 @@ require("./src/authentication/routes/auth.routes")(app);
 db.pets = require("./src/PetSittingApp/models/pets.model")(db.sequelize, db.Sequelize);
 db.reserves = require("./src/PetSittingApp/models/reserves.model.js")(db.sequelize, db.Sequelize);
 db.users = require("./src/PetSittingApp/models/user.model.js")(db.sequelize, db.Sequelize);
+db.userRoles = require("./src/authentication/models/userRole.model.js")(db.sequelize, db.Sequelize);
+db.serviceTax = require("./src/PetSittingApp/models/service_tax.model.js")(db.sequelize, db.Sequelize);
 require("./src/PetSittingApp/routes/PetSittingApp.routes.js")(app);
 
 // // DOmain Examples routes

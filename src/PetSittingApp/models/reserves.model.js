@@ -21,6 +21,24 @@ module.exports = (sequelize, Sequelize) => {
         },
         bgColor: {
             type: Sequelize.STRING
+        },
+        status: {
+            type: Sequelize.INTEGER
+        },
+        price: {
+            type: Sequelize.DOUBLE
+        },
+        comments: {
+            type: Sequelize.TEXT
+        },
+        numHours: {
+            type: Sequelize.INTEGER
+        },
+        petSiter: {
+            type: Sequelize.INTEGER
+        },
+        reportId: {
+            type: Sequelize.INTEGER
         }
 
     });

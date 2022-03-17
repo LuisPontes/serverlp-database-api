@@ -10,7 +10,10 @@ module.exports = function(app) {
     next();
   });
 
+  //ALl
   app.get("/api/test/all", controller.allAccess);
+  app.get("/api/pet/servicetax", controller.adminGetServie);
+
 //*Clients */
   //PETS
   app.post(
@@ -50,10 +53,17 @@ module.exports = function(app) {
 
  //*Workers */
   app.get(
-    "/api/test/mod",
+    "/api/mod",
     [authJwt.verifyToken, authJwt.isModerator],
     controller.moderatorBoard
   );
+  
+  app.get(
+    "/api/mod/openReserves",
+    [authJwt.verifyToken, authJwt.isModerator],
+    controller.getOpenReserves
+  );
+
 //*Administrators */
   app.get(
     "/api/test/admin",
@@ -64,5 +74,25 @@ module.exports = function(app) {
     "/api/admin/users",
     [authJwt.verifyToken, authJwt.isAdmin],
     controller.adminUsers
+  );
+  app.post(
+    "/api/admin/user_role",
+    [authJwt.verifyToken, authJwt.isAdmin],
+    controller.adminUserRoleUpdate
+  );
+  app.get(
+    "/api/admin/servicetax",
+    [authJwt.verifyToken, authJwt.isAdmin],
+    controller.adminGetServie
+  );
+  app.post(
+    "/api/admin/servicetax",
+    [authJwt.verifyToken, authJwt.isAdmin],
+    controller.adminUpdateServie
+  );
+  app.get(
+    "/api/admin/openReserves",
+    [authJwt.verifyToken, authJwt.isAdmin],
+    controller.getOpenReserves
   );
 };
